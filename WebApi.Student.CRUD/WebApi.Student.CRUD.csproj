@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\.vs\ProjectSettings.json" />
+    <Content Include="wwwroot\.vs\tasks.vs.json" />
+    <Content Include="wwwroot\.vs\VSWorkspaceState.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\.vs\layuimini-2\config\applicationhost.config" />
+    <None Include="wwwroot\.vs\slnx.sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\.vs\layuimini-2\v16\" />
+    <Folder Include="wwwroot\aspnet_client\system_web\2_0_50727\" />
+    <Folder Include="wwwroot\aspnet_client\system_web\4_0_30319\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.20" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.15" />
+  </ItemGroup>
+
+
+</Project>

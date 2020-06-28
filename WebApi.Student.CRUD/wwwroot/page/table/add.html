@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-form layuimini-form">
+
+        <form id="formId">            
+            <div class="layui-form-item">
+                <label class="layui-form-label required">课程名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="courseName" id="courseName" lay-verify="required" lay-reqtext="课程名称不能为空" placeholder="请输入课程名称" value="" class="layui-input">
+                    <tip>填写课程名称。</tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">授课教师</label>
+                <div class="layui-input-block">
+                    <input type="text" name="courseTeacher" id="ourseTeacher" lay-verify="required" lay-reqtext="授课教师不能为空" placeholder="请输入授课教师" value="" class="layui-input">
+                    <tip>填写授课教师。</tip>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="teacherSex" value="男" title="男">
+                    <input type="radio" name="teacherSex" value="女" title="女">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">课程简介</label>
+                <div class="layui-input-block">
+                    <textarea name="courseDetail" id="courseDetail" class="layui-textarea" placeholder="请输入课程简介"></textarea>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$;
+
+            //监听提交
+            form.on('submit(saveBtn)', function (data) {
+                $.ajax(
+                    {
+                        url: '/api/course/getadd',     // 请求地址, 就是你的控制器, 如 test.com/home/index/index
+                        data: $("#formId").serialize(),
+                        type: 'post',   // 请求方式
+                        async: false,
+                        datatype: 'json', // 返回数据的格式, 通常为json
+                        contenttype: 'application/json',
+                        success: function (data) {
+                            // 验证是否存在业务逻辑验证失败的地方，如果有，需要把错误信息暴露出来                            
+                                if (data != "") {
+                                    layer.open({
+                                        title: '提示',
+                                        content: data
+                                    });
+                                }                               
+                           
+                            //location.reload(true);
+                        }
+                    }
+
+                );
+                //var index = layer.alert(JSON.stringify(data.field), {
+                //    title: '最终的提交信息'
+                //}, function () {
+
+                //    // 关闭弹出层
+                //    layer.close(index);
+
+                //    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                //    parent.layer.close(iframeIndex);
+
+                //});
+                //return false;
+            });
+        });
+    </script>
+</body>
+</html>
